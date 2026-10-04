@@ -14,6 +14,16 @@ from fastapi.responses import JSONResponse
 # Load environment variables
 load_dotenv()
 
+import sys
+from pathlib import Path
+
+# Ensure root and backend directory are in sys.path for Vercel Services
+_current_dir = Path(__file__).resolve().parent
+_root_dir = _current_dir.parent
+for _p in [str(_root_dir), str(_current_dir)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
 from backend.database import init_db
 from backend.routers import auth_routes, profile_routes, research_routes, upload_routes
 from backend.services.gemini_service import is_gemini_key_valid
