@@ -3952,15 +3952,20 @@ function AuthForm({ mode, onSuccess, onSwitchMode }: AuthFormProps) {
         credentials: 'include'
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        data = { detail: `Server error (${res.status}). Please verify the backend is active.` };
+      }
 
       if (res.ok) {
         onSuccess(data.user, data.profile, Boolean(data.requires_profile_completion));
       } else {
         setErrorMsg(data.detail || 'Authentication failed. Please verify credentials.');
       }
-    } catch {
-      setErrorMsg('Network error. Please try again.');
+    } catch (err: any) {
+      setErrorMsg(err?.message ? `Network error: ${err.message}` : 'Network error. Please try again.');
     } finally {
       setLoading(false);
     }
