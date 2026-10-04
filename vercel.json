@@ -1,7 +1,8 @@
 {
   "services": {
     "app": {
-      "root": "./"
+      "root": "./",
+      "framework": "vite"
     },
     "backend": {
       "root": "backend/",
