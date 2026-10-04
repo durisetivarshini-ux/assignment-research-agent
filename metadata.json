@@ -1,0 +1,8 @@
+{
+  "name": "AI Assignment Research Agent",
+  "description": "An AI-powered academic research assistant that analyzes assignment topics, synthesizes findings, organizes sources, and generates structured academic reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
