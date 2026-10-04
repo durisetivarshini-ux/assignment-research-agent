@@ -17,7 +17,7 @@ from backend.auth import get_current_user
 
 router = APIRouter(prefix="/api/upload", tags=["File Uploads"])
 
-UPLOAD_DIR = Path("./backend/uploads")
+UPLOAD_DIR = Path("/tmp/uploads") if os.getenv("VERCEL") else Path("./backend/uploads")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024  # 15 MB

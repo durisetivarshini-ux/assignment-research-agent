@@ -7,7 +7,10 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./research_agent.db")
+if os.getenv("VERCEL"):
+    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:////tmp/research_agent.db")
+else:
+    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./research_agent.db")
 
 # For SQLite, ensure check_same_thread is False
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
